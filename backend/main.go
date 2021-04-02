@@ -11,19 +11,8 @@ import (
 )
 
 func main() {
-
-	// Get all the data from Halo Api
-	mapsArrays := http2.GetMaps()
-	fmt.Println(mapsArrays[0])
-	// convert the original struct to mongo model
-	mapModel := mongo.MapToModel(mapsArrays[0])
-	fmt.Println("EL MODELO DE MONGO ES: ")
-	fmt.Println(mapModel)
-	// Create the connection with mongo
-	DbConnection := mongo.Db()
-	fmt.Println(DbConnection)
-	// Insert the previous data inside the database
-	mongo.InsertMaps(mapModel)
+	// Fill the database
+	mongo.FillDatabase()
 	// Create the router with his routes and methods
 	r := mux.NewRouter()
 	fmt.Println("Se ha inicializado el server")
