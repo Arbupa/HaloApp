@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/arbupa/HaloApp/structs"
+	"github.com/Arbupa/HaloApp/backend/structs"
 )
 
 func GetMissions() []structs.Missions {
