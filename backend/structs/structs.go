@@ -2,6 +2,7 @@ package structs
 
 type Maps struct {
 	ID                 string
+	IDApi              string   `json:"id"`
 	Name               string   `json:"name"`
 	Description        string   `json:"description"`
 	ImageUrl           string   `json:"imageUrl"`
@@ -20,6 +21,7 @@ type Skulls struct {
 
 type Missions struct {
 	ID            string
+	IDApi         string `json:"id"`
 	MissionNumber int    `json:"missionNumber"`
 	Name          string `json:"name"`
 	Description   string `json:"description"`
@@ -29,6 +31,7 @@ type Missions struct {
 
 type Enemies struct {
 	ID       string
+	IDApi    string `json:"id"`
 	Faction  string `json:"faction"`
 	Name     string `json:"name"`
 	ImageUrl string `json:"largeIconImageUrl"`
@@ -36,6 +39,7 @@ type Enemies struct {
 
 type Weapons struct {
 	ID               string
+	IDApi            string `json:"id"`
 	Name             string `json:"name"`
 	Description      string `json:"description"`
 	ImageUrl         string `json:"largeIconImageUrl"`
@@ -45,6 +49,7 @@ type Weapons struct {
 
 type Vehicles struct {
 	ID               string
+	IDApi            string `json:"id"`
 	Name             string `json:"name"`
 	Description      string `json:"description"`
 	ImageUrl         string `json:"largeIconImageUrl"`

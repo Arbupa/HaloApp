@@ -2,21 +2,26 @@ package mongo
 
 import (
 	"context"
-	"log"
-	"net/http"
-
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
+	"fmt"
+	"time"
 )
 
-func InsertMaps(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	client, err := mongo.NewClient(options.Client())
-	if err != nil {
-		log.Fatal(err)
-	}
-	database := client.Database("Halo")
-	defer client.Disconnect(context.TODO())
-	mapsCollection := database.Collection("maps")
+var Database = Db().Database("HaloApp") // get collection "HaloApp" from Db() which returns *mongo.Client
 
+func InsertMaps(arr MapsModel) {
+
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+
+	//defer client.Disconnect(ctx)
+	mapsCollection := Database.Collection("maps")
+
+	//for _, v := range arr {
+	insertMap, err := mapsCollection.InsertOne(ctx, arr)
+	if err != nil {
+		fmt.Println(err)
+	}
+	if insertMap != nil {
+		fmt.Println(insertMap.InsertedID)
+	}
+	//}
 }
