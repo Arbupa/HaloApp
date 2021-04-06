@@ -1,41 +1,164 @@
 package http2
 
-//Agregar una interface para usar esas funciones/objetos que necesito y evitar el loop
-
 import (
+	"context"
+	"encoding/json"
+	"fmt"
+	"log"
 	"net/http"
+
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"gopkg.in/mgo.v2/bson"
 )
 
-var HeaderContent = "Content-Type"
-var HeaderKey = "Ocp-Apim-Subscription-Key"
-var HeaderLanguage = "Accept-Language"
-var HeaderContentValue = "application/json"
-var HeaderKeyValue = "befa6b6ab5f4416fbd991b02f5543160"
-var HeaderLanguageValue = "en"
+var Database = Db().Database("HaloApp")
 
-func GetCampaignMissions(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set(HeaderContent, HeaderContentValue)
-	// w.Header().Set(HeaderKey, HeaderKeyValue)
-	// w.Header().Set(HeaderLanguage, HeaderLanguageValue)
-	// var results []primitive.M
-	// dbMongo := mongo.Database
-	// //slice for multiple documents
-	// cur, err := dbMongo.Collection("mission").Find(context.TODO(), bson.D{{}}) //returns a *mongo.Cursor
-	// if err != nil {
+func GetAllMaps(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
 
-	// 	fmt.Println(err)
+	var results []primitive.M
 
-	// }
-	// for cur.Next(context.TODO()) { //Next() gets the next document for corresponding cursor
+	missionCollection := Database.Collection("maps") //returns a *mongo.Cursor
+	cur, err := missionCollection.Find(context.TODO(), bson.M{})
+	if err != nil {
+		fmt.Println(err)
+	}
 
-	// 	var elem primitive.M
-	// 	err := cur.Decode(&elem)
-	// 	if err != nil {
-	// 		log.Fatal(err)
-	// 	}
+	for cur.Next(context.TODO()) { //Next() gets the next document for corresponding cursor
 
-	// 	results = append(results, elem) // appending document pointed by Next()
-	// }
-	// cur.Close(context.TODO()) // close the cursor once stream of documents has exhausted
-	// json.NewEncoder(w).Encode(results)
+		var elem primitive.M
+		err := cur.Decode(&elem)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		results = append(results, elem) // appending document pointed by Next()
+	}
+	cur.Close(context.TODO()) // close the cursor once stream of documents has exhausted
+	json.NewEncoder(w).Encode(results)
+}
+
+func GetAllSkulls(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	var results []primitive.M
+
+	missionCollection := Database.Collection("skulls") //returns a *mongo.Cursor
+	cur, err := missionCollection.Find(context.TODO(), bson.M{})
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	for cur.Next(context.TODO()) { //Next() gets the next document for corresponding cursor
+
+		var elem primitive.M
+		err := cur.Decode(&elem)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		results = append(results, elem) // appending document pointed by Next()
+	}
+	cur.Close(context.TODO()) // close the cursor once stream of documents has exhausted
+	json.NewEncoder(w).Encode(results)
+}
+
+func GetAllMissions(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	var results []primitive.M
+
+	missionCollection := Database.Collection("missions") //returns a *mongo.Cursor
+	cur, err := missionCollection.Find(context.TODO(), bson.M{})
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	for cur.Next(context.TODO()) { //Next() gets the next document for corresponding cursor
+
+		var elem primitive.M
+		err := cur.Decode(&elem)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		results = append(results, elem) // appending document pointed by Next()
+	}
+	cur.Close(context.TODO()) // close the cursor once stream of documents has exhausted
+	json.NewEncoder(w).Encode(results)
+}
+
+func GetAllEnemies(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	var results []primitive.M
+
+	missionCollection := Database.Collection("enemies") //returns a *mongo.Cursor
+	cur, err := missionCollection.Find(context.TODO(), bson.M{})
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	for cur.Next(context.TODO()) { //Next() gets the next document for corresponding cursor
+
+		var elem primitive.M
+		err := cur.Decode(&elem)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		results = append(results, elem) // appending document pointed by Next()
+	}
+	cur.Close(context.TODO()) // close the cursor once stream of documents has exhausted
+	json.NewEncoder(w).Encode(results)
+}
+
+func GetAllWeapons(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	var results []primitive.M
+
+	missionCollection := Database.Collection("weapons") //returns a *mongo.Cursor
+	cur, err := missionCollection.Find(context.TODO(), bson.M{})
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	for cur.Next(context.TODO()) { //Next() gets the next document for corresponding cursor
+
+		var elem primitive.M
+		err := cur.Decode(&elem)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		results = append(results, elem) // appending document pointed by Next()
+	}
+	cur.Close(context.TODO()) // close the cursor once stream of documents has exhausted
+	json.NewEncoder(w).Encode(results)
+}
+
+func GetAllVehicles(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	var results []primitive.M
+
+	missionCollection := Database.Collection("vehicles") //returns a *mongo.Cursor
+	cur, err := missionCollection.Find(context.TODO(), bson.M{})
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	for cur.Next(context.TODO()) { //Next() gets the next document for corresponding cursor
+
+		var elem primitive.M
+		err := cur.Decode(&elem)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		results = append(results, elem) // appending document pointed by Next()
+	}
+	cur.Close(context.TODO()) // close the cursor once stream of documents has exhausted
+	json.NewEncoder(w).Encode(results)
 }

@@ -3,12 +3,15 @@ package mongo
 import (
 	"context"
 	"fmt"
+	"log"
 	"time"
 
 	"github.com/Arbupa/HaloApp/http2"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"gopkg.in/mgo.v2/bson"
 )
 
-var Database = Db().Database("HaloApp") // get collection "HaloApp" from Db() which returns *mongo.Client
+var Database = http2.Db().Database("HaloApp") // get collection "HaloApp" from Db() which returns *mongo.Client
 
 func InsertMaps(arr []MapsModel) {
 
@@ -108,6 +111,31 @@ func InsertVehicles(arr []VehiclesModel) {
 			fmt.Println(insertVehicle.InsertedID)
 		}
 	}
+}
+
+func DataExists() bool {
+	result := false
+	var data []primitive.M
+	//cursor, err := Database.Collection("maps").Find(context.TODO(), bson.M{})
+	cursor, err := Database.Collection("maps").Find(context.TODO(), bson.M{})
+	if err != nil {
+		return result
+	}
+	for cursor.Next(context.TODO()) {
+
+		var elem primitive.M
+
+		err := cursor.Decode(&elem)
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		data = append(data, elem)
+	}
+	result = true
+
+	return result
 }
 
 func FillDatabase() error {
