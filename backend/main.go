@@ -11,6 +11,7 @@ import (
 )
 
 func main() {
+	// fix this thing to not always fill Database
 	// data := mongo.DataExists()
 	// fmt.Println(data)
 	// if data == false {

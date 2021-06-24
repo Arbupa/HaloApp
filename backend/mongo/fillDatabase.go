@@ -139,27 +139,27 @@ func DataExists() bool {
 }
 
 func FillDatabase() error {
-	// maps operations
+	// Get Maps, convert to MongoModel and insert
 	mapsArrays := http2.GetMaps()
 	mapModels := MapsToModel(mapsArrays)
 	InsertMaps(mapModels)
-	// ahora las de skulls
+	// Get Skulls, convert to MongoModel and insert
 	skullsArrays := http2.GetSkulls()
 	skullsModels := SkullsToModel(skullsArrays)
 	InsertSkulls(skullsModels)
-	// ahora Missiones
+	// Get Missions, convert to MongoModel and insert
 	missionsArrays := http2.GetMissions()
 	missionsModels := MissionsToModel(missionsArrays)
 	InsertMissions(missionsModels)
-	// ahora Enemies
+	// Get Enemies, convert to MongoModel and insert
 	enemiesArrays := http2.GetEnemies()
 	enemiesModels := EnemiesToModel(enemiesArrays)
 	InsertEnemies(enemiesModels)
-	// ahora Weapons
+	// Get Weapons, convert to MongoModel and insert
 	weaponsArrays := http2.GetWeapons()
 	weaponsModels := WeaponsToModel(weaponsArrays)
 	InsertWeapons(weaponsModels)
-	// ahora Vehicles
+	// Get Vehicles, convert to MongoModel and insert
 	vehiclesArrays := http2.GetVehicles()
 	vehiclesModels := VehiclesToModel(vehiclesArrays)
 	InsertVehicles(vehiclesModels)

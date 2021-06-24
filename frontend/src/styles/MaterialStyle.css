@@ -1,0 +1,8 @@
+#botonOut {
+  color: "black";
+  background-color: aqua;
+  position: fixed;
+  right: 40px;
+  top: 10px;
+  width: 300px;
+}
